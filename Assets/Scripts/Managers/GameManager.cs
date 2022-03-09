@@ -17,15 +17,18 @@ public class GameManager : MonoBehaviour
 
     public static UIController UIController;
     public static CoinManager CoinManager;
+    public static TimerManager TimerManager;
+    public static SceneAndURLLoader SceneAndURLLoader;
 
     private static GameObject MainCamera;
+
 
     private void Awake()
     {
         if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
-            Debug.Log("GameManager DESTROYED");
+            Debug.Log("GameManager DESTROYED due to _instance thingies.");
         }
         _instance = this;
         DontDestroyOnLoad(_instance);
@@ -55,12 +58,12 @@ public class GameManager : MonoBehaviour
     public void ResetStage()
     {
         ResetPlayerPosition();
-        ResetTimer();
+        TimerManager.ResetTimer();
     }
 
     public void ResetPlayerPosition()
     {
-        Player.GetComponent<Player>().ResetPosition();
+        //Player.GetComponent<ThirdPersonCharacter>().ResetPosition();
     }
 
     public void GameOver()
@@ -69,25 +72,25 @@ public class GameManager : MonoBehaviour
         StartCoroutine(WaitForGameOverScreen());
     }
 
-    private void ResetGame()
-    {
-        GoToStartMenu();
-    }
-
     private IEnumerator WaitForGameOverScreen()
     {
         yield return new WaitForSeconds(UIController.GameOverScreenTime);
         ResetGame();
     }
 
+    private void ResetGame()
+    {
+        GoToStartMenu();
+    }
+
     private void GoToStartMenu()
     {
-        SceneManager.LoadScene("RogueLikeStartMenu");
+        SceneManager.LoadScene("StartMenu");
     }
 
     public void GoToInGameScene()
     {
-        SceneManager.LoadScene("RogueLikeInGame");
+        SceneManager.LoadScene("InGame");
     }
 
     public bool SuccessfulRol(float DropChance)

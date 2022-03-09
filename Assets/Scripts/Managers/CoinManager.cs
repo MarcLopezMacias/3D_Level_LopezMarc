@@ -5,11 +5,12 @@ using UnityEngine;
 public class CoinManager : MonoBehaviour
 {
 
-    int AmountOfCoins;
-    
+    [SerializeField]
+    int Quantity;
+
     void Start()
     {
-        AmountOfCoins = 0;
+        Quantity = 0;
     }
 
     // Update is called once per frame
@@ -20,11 +21,11 @@ public class CoinManager : MonoBehaviour
 
     public void Add(int amount)
     {
-        AmountOfCoins += amount;
+        Quantity += amount;
     }
 
     public int GetAmount()
     {
-        return AmountOfCoins;
+        return Quantity;
     }
 }

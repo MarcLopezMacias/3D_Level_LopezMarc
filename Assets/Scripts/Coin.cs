@@ -5,11 +5,12 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
 
-    private MeshCollider collider;
+    [SerializeField]
+    int CoinValue;
 
     void Start()
     {
-        collider = gameObject.GetComponent<MeshCollider>();
+
     }
 
     void Update()
@@ -21,8 +22,14 @@ public class Coin : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player"))
         {
-            GameManager.Instance.GetComponent<CoinManager>().Add(1);
+            AddCoin();
         }
+    }
+
+    private void AddCoin()
+    {
+        Debug.Log("SHOULD ADD COIN");
+        GameManager.Instance.GetComponent<CoinManager>().Add(CoinValue);
     }
 
 

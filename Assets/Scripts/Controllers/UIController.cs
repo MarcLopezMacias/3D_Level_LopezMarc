@@ -5,10 +5,9 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-    public Text LifesText;
-    public Text HealthText;
+    public Text TimeText;
 
-    private Text CoinsText;
+    public Text CoinsText;
 
     public Text GameOverText;
     public Text GameOverScoreText;
@@ -34,30 +33,41 @@ public class UIController : MonoBehaviour
     {
         if (mainLoop)
         {
-            LifesText.text = "Lifes: " + GameManager.Instance.Player.GetComponent<Player>().GetLifes();
-            HealthText.text = "HP: " + GameManager.Instance.Player.GetComponent<Player>().GetHealth()
-            //   + " / " + GameManager.Instance.Player.GetComponent<Player>().GetMaxHealth();
-            ;
-
-            CoinsText.text = "Coins: " + GetCoins();
-
-            GameOverText.text = "";
-            GameOverScoreText.text = "";
+            UpdateCoins();
+            UpdateTime();
+            NoGameOver();
         }
         else
         {
-            LifesText.text = "";
-            HealthText.text = "";
-
             GameOverText.text = GameOverString;
-            GameOverScoreText.text = "Final Score: " + GameManager.Instance.GetComponent<CoinManager>().GetAmount();
-
+            GameOverScoreText.text = "Final Score: " + GetCoins(); ;
         }
+    }
+
+    private int GetTimeLeft()
+    {
+        return GameManager.Instance.GetComponent<TimerManager>().GetTimeLeft();
+    }
+
+    private void UpdateCoins()
+    {
+        CoinsText.text = "Coins: " + GetCoins();
     }
 
     private int GetCoins()
     {
-        return GameManager.Instance.GetComponent<CoinManager>().Amount;
+        return GameManager.Instance.GetComponent<CoinManager>().GetAmount();
+    }
+
+    private void UpdateTime()
+    {
+        TimeText.text = "Time Left: " + GetTimeLeft();
+    }
+
+    private void NoGameOver()
+    {
+        GameOverText.text = "";
+        GameOverScoreText.text = "";
     }
 
     public void GameOver()
