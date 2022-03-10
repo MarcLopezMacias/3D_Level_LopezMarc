@@ -10,12 +10,15 @@ public class Coin : MonoBehaviour
 
     void Start()
     {
-
+        if(CoinValue <= 0)
+        {
+            CoinValue = 1;
+        }
     }
 
     void Update()
     {
-        
+
     }
 
     private void OnCollisionEnter(Collision collision)
