@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +11,12 @@ public class Coin : MonoBehaviour
 
     void Start()
     {
-        if(CoinValue <= 0)
+        MakeSureItsAtLeastOne();
+    }
+
+    private void MakeSureItsAtLeastOne()
+    {
+        if (CoinValue <= 0)
         {
             CoinValue = 1;
         }
