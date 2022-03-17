@@ -58,4 +58,9 @@ public class TimerManager : MonoBehaviour
     {
         GameManager.Instance.GameOver();
     }
+
+    public void IncreaseTime(int ExtraTime)
+    {
+        TimeLeft += ExtraTime;
+    }
 }

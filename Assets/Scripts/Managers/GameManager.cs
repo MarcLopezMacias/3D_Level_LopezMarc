@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
 
     private static GameObject MainCamera;
 
+    public int TotalCoins;
+    public int CurrentCoins;
 
     private void Awake()
     {
@@ -52,6 +54,10 @@ public class GameManager : MonoBehaviour
         if (_player == null)
         {
             _player = GameObject.FindWithTag("Player");
+        }
+        if (GameManager.Instance.TotalCoins == CurrentCoins)
+        {
+            GameManager.Instance.GameOver();
         }
     }
 

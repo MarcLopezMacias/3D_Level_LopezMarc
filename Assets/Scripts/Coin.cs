@@ -8,9 +8,12 @@ public class Coin : MonoBehaviour
 
     [SerializeField]
     int CoinValue;
+    [SerializeField]
+    int ExtraTimeValue;
 
     void Start()
     {
+        AddToTotal();
         MakeSureItsAtLeastOne();
     }
 
@@ -20,6 +23,10 @@ public class Coin : MonoBehaviour
         {
             CoinValue = 1;
         }
+        if (ExtraTimeValue <= 0)
+        {
+            ExtraTimeValue = 1;
+        }
     }
 
     void Update()
@@ -27,18 +34,35 @@ public class Coin : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collider)
     {
-        if (collision.collider.CompareTag("Player"))
+        if (collider.CompareTag("Player"))
         {
             AddCoin();
+            AddTime();
+            DeleteCoin();
         }
     }
 
     private void AddCoin()
     {
-        Debug.Log("SHOULD ADD COIN");
+        // Debug.Log("SHOULD ADD COIN");
         GameManager.Instance.GetComponent<CoinManager>().Add(CoinValue);
+    }
+
+    private void AddTime()
+    {
+        GameManager.Instance.GetComponent<TimerManager>().IncreaseTime(ExtraTimeValue);
+    }
+
+    private void DeleteCoin()
+    {
+        Destroy(this.gameObject);
+    }
+
+    private void AddToTotal()
+    {
+        GameManager.Instance.TotalCoins++;
     }
 
 

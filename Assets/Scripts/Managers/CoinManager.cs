@@ -13,12 +13,6 @@ public class CoinManager : MonoBehaviour
         Quantity = 0;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void Add(int amount)
     {
         Quantity += amount;
